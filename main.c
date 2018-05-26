@@ -5,14 +5,14 @@ int main(void) {
     DDRB &= ~(1<<PB3);  // IN
     PORTB |= (1<<PB3);  // Pull-up ON
 
-
     DDRB |=  (1<<PB4);   // OUT
 	
 	while(1) {
-        PORTB |= (1<<PB4);
-		_delay_ms(1000);
-		PORTB &= ~(1<<PB4);
-		_delay_ms(1000);
+        if (PINB & (1<<PB3)) {  // Not pressed
+            PORTB |= (1<<PB4);  // Turn OFF
+        } else {
+		    PORTB &= ~(1<<PB4);  // Turn ON
+        }
 	}
 	return 0;
 }
